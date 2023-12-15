@@ -1,0 +1,10 @@
+spring:
+  jpa:
+    generate-ddl: true
+  datasource:
+    url: jdbc:postgresql://localhost:5433/news_db
+    username: postgres
+    password: postgres
+    hikari:
+      schema: news_schema
+      connection-timeout: 1000
