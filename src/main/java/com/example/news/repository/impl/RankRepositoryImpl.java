@@ -1,8 +1,6 @@
 package com.example.news.repository.impl;
 
 import com.example.news.model.Rank;
-import com.example.news.model.Rank;
-import com.example.news.repository.NewsRepository;
 import com.example.news.repository.RankRepository;
 import com.example.news.utils.BeanUtils;
 import jakarta.persistence.EntityNotFoundException;
@@ -19,8 +17,8 @@ import java.util.concurrent.atomic.AtomicLong;
 public class RankRepositoryImpl implements RankRepository {
 
 
-    private static List<Rank> ranks = new ArrayList<>();
-    private static AtomicLong currentId = new AtomicLong(1);
+    private final List<Rank> ranks = new ArrayList<>();
+    private final AtomicLong currentId = new AtomicLong(1);
 
 
     @Override

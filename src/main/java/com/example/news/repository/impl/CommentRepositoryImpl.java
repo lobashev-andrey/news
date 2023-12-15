@@ -2,7 +2,6 @@ package com.example.news.repository.impl;
 
 import com.example.news.model.Comment;
 import com.example.news.model.News;
-import com.example.news.model.User;
 import com.example.news.repository.CommentRepository;
 import com.example.news.utils.BeanUtils;
 import jakarta.persistence.EntityNotFoundException;

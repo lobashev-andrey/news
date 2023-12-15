@@ -1,14 +1,13 @@
 package com.example.news.mapper;
 
-import com.example.news.model.News;
 import com.example.news.model.User;
-import com.example.news.service.UserService;
-import com.example.news.utils.BeanUtils;
-import com.example.news.web.dto.*;
+import com.example.news.web.dto.NewsResponseShort;
+import com.example.news.web.dto.UserRequest;
+import com.example.news.web.dto.UserResponse;
+import com.example.news.web.dto.UserResponseList;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Component

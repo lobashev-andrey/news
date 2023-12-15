@@ -5,7 +5,6 @@ import com.example.news.model.Rank;
 import com.example.news.model.User;
 import com.example.news.service.RankService;
 import com.example.news.service.UserService;
-import com.example.news.utils.BeanUtils;
 import com.example.news.web.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

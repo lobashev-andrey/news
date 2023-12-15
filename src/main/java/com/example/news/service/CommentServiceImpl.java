@@ -1,10 +1,7 @@
 package com.example.news.service;
 
 import com.example.news.model.Comment;
-import com.example.news.model.Comment;
 import com.example.news.repository.CommentRepository;
-import com.example.news.repository.CommentRepository;
-import com.example.news.service.CommentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

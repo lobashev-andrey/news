@@ -1,6 +1,5 @@
 package com.example.news.web.dto;
 
-import com.example.news.model.Comment;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

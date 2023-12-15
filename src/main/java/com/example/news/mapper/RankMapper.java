@@ -1,7 +1,6 @@
 package com.example.news.mapper;
 
 import com.example.news.model.Rank;
-import com.example.news.service.RankService;
 import com.example.news.service.UserService;
 import com.example.news.web.dto.RankRequest;
 import com.example.news.web.dto.RankResponse;

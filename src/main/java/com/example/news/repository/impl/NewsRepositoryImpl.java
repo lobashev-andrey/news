@@ -4,13 +4,9 @@ import com.example.news.model.News;
 import com.example.news.model.User;
 import com.example.news.repository.CommentRepository;
 import com.example.news.repository.NewsRepository;
-import com.example.news.repository.UserRepository;
-import com.example.news.service.CommentService;
-import com.example.news.service.UserService;
 import com.example.news.utils.BeanUtils;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.text.MessageFormat;

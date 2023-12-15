@@ -1,7 +1,6 @@
 package com.example.news.repository;
 
 import com.example.news.model.News;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 
