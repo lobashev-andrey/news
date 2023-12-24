@@ -1,11 +1,11 @@
-//package com.example.news.repository;
-//
-//import com.example.news.model.News;
-//import org.springframework.data.jpa.repository.JpaRepository;
-//
-//public interface DatabaseNewsRepository extends JpaRepository<News, Long> {
-//
-//
-//
-//
-//}
+package com.example.news.repository;
+
+import com.example.news.model.News;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface DatabaseNewsRepository extends JpaRepository<News, Long>, JpaSpecificationExecutor<News> {
+
+}

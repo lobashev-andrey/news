@@ -1,5 +1,6 @@
 package com.example.news.service;
 
+import com.example.news.filter.NewsFilter;
 import com.example.news.model.News;
 
 import java.util.List;
@@ -15,4 +16,6 @@ public interface NewsService {
     News update(News news);
 
     void delete(Long id);
+
+    List<News> filterBy(NewsFilter filter);
 }

@@ -1,5 +1,6 @@
 package com.example.news.service;
 
+import com.example.news.filter.NewsFilter;
 import com.example.news.model.News;
 import com.example.news.repository.NewsRepository;
 import lombok.RequiredArgsConstructor;
@@ -36,5 +37,10 @@ public class NewsServiceImpl implements NewsService{
     @Override
     public void delete(Long id) {
         repository.delete(id);
+    }
+
+    @Override
+    public List<News> filterBy(NewsFilter filter) {
+        return null;
     }
 }

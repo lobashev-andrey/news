@@ -13,8 +13,12 @@ public class BeanUtils {
         Field[] fields = clazz.getDeclaredFields();
         for(Field field : fields){
             field.setAccessible(true);
+            if((field.getName().matches("news|comments"))) {
+                continue;
+            }
 
             Object value = field.get(source);
+
             if(value != null) field.set(destination, value);
         }
     }

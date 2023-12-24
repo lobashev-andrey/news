@@ -1,4 +1,4 @@
-package com.example.news.mapper;
+package com.example.news.mapper.v1;
 
 import com.example.news.model.User;
 import com.example.news.web.dto.NewsResponseShort;
@@ -16,7 +16,7 @@ public class UserMapper {
 
     private final NewsMapper newsMapper;
 
-    public UserResponse userToResponse(User user){
+    public UserResponse userToUserResponse(User user){
         UserResponse response = new UserResponse();
         response.setName(user.getName());
         response.setId(user.getId());
@@ -28,7 +28,7 @@ public class UserMapper {
         return response;
     }
 
-    public User requestToUser(UserRequest request){
+    public User userRequestToUser(UserRequest request){
         User user = new User();
         String name = request.getName();
         user.setName(name);
@@ -36,26 +36,21 @@ public class UserMapper {
         return user;
     }
 
-    public User requestToUser(Long id, UserRequest request){
-        User user = requestToUser(request);
+    public User userRequestToUser(Long id, UserRequest request){
+        User user = userRequestToUser(request);
         user.setId(id);
-        user.setNews(null);
+        user.setNews(null); // чтобы .nonNullPropertiesCopy не перезаписывал пустым листом
+        user.setComments(null); // чтобы .nonNullPropertiesCopy не перезаписывал пустым листом
 
         return user;
     }
 
 
-    public UserResponseList userListToResponseList(List<User> users){
+    public UserResponseList userListToUserResponseList(List<User> users){
         UserResponseList response = new UserResponseList();
-        List<UserResponse> responses = users.stream().map(this::userToResponse).toList();
+        List<UserResponse> responses = users.stream().map(this::userToUserResponse).toList();
         response.setUsers(responses);
 
         return response;
     }
-
-
-
-
-
-
 }

@@ -1,4 +1,4 @@
-package com.example.news.mapper;
+package com.example.news.mapper.v1;
 
 import com.example.news.model.Comment;
 import com.example.news.model.News;
@@ -24,8 +24,8 @@ public class CommentMapper {
         CommentResponse response = new CommentResponse();
         response.setId(comment.getId());
         response.setText(comment.getText());
-        response.setAuthor_id(comment.getAuthor().getId());
-        response.setNews_id(comment.getNews().getId());
+        response.setUserId(comment.getUser().getId());
+        response.setNewsId(comment.getNews().getId());
 
         return response;
     }
@@ -34,11 +34,11 @@ public class CommentMapper {
         Comment comment = new Comment();
         comment.setText(request.getText());
 
-        News news = newsService.findById(request.getNews_id());
+        News news = newsService.findById(request.getNewsId());
         comment.setNews(news);
 
-        User user = userService.findById(request.getAuthor_id());
-        comment.setAuthor(user);
+        User user = userService.findById(request.getUserId());
+        comment.setUser(user);
 
         return comment;
     }

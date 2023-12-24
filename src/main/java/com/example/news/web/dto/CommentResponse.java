@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class CommentResponse {
 
     private Long id;
-    private Long news_id;
-    private Long author_id;
+    private Long newsId;
+    private Long userId;
     private String text;
 }

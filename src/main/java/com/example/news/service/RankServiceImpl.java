@@ -1,5 +1,6 @@
 package com.example.news.service;
 
+import com.example.news.filter.RankFilter;
 import com.example.news.model.Rank;
 import com.example.news.repository.RankRepository;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +15,10 @@ public class RankServiceImpl implements RankService{
     private final RankRepository repository;
 
     @Override
+    public List<Rank> findAll(RankFilter filter) {
+        return null; // Заглушка
+    }
+
     public List<Rank> findAll() {
         return repository.findAll();
     }

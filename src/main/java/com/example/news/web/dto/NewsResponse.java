@@ -15,7 +15,7 @@ public class NewsResponse {
     private Long id;
     private String name;
     private String text;
-    private Long rank_id;
-    private Long user_id;
+    private Long rankId;
+    private Long userId;
     private List<CommentResponse> comments = new ArrayList<>();
 }

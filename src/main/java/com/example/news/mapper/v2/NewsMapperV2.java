@@ -1,10 +1,10 @@
-package com.example.news.mapper;
+package com.example.news.mapper.v2;
 
 import com.example.news.model.News;
 import com.example.news.model.Rank;
 import com.example.news.model.User;
-import com.example.news.service.RankService;
-import com.example.news.service.UserService;
+import com.example.news.service.DatabaseRankService;
+import com.example.news.service.DatabaseUserService;
 import com.example.news.web.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -13,19 +13,19 @@ import java.util.List;
 
 @Component
 @RequiredArgsConstructor
-public class NewsMapper {
+public class NewsMapperV2 {
 
-    private final UserService userService;
-    private final RankService rankService;
-    private final CommentMapper commentMapper;
+    private final DatabaseUserService userService;
+    private final DatabaseRankService rankService;
+    private final CommentMapperV2 commentMapper;
 
     public NewsResponse newsToResponse(News news){
         NewsResponse response = new NewsResponse();
         response.setId(news.getId());
         response.setName(news.getName());
         response.setText(news.getText());
-        response.setUser_id(news.getUser().getId());
-        response.setRank_id(news.getRank().getId());
+        response.setUserId(news.getUser().getId());
+        response.setRankId(news.getRank().getId());
 
         List<CommentResponse> responses = news.getComments().stream()
                 .map(commentMapper::commentToCommentResponse).toList();
@@ -39,8 +39,8 @@ public class NewsMapper {
         response.setId(news.getId());
         response.setName(news.getName());
         response.setText(news.getText());
-        response.setUser_id(news.getUser().getId());
-        response.setRank_id(news.getRank().getId());
+        response.setUserId(news.getUser().getId());
+        response.setRankId(news.getRank().getId());
         response.setCommentsCount(news.getComments().size());
         return response;
     }
@@ -50,10 +50,10 @@ public class NewsMapper {
         news.setName(request.getName());
         news.setText(request.getText());
 
-        User user = userService.findById(request.getUser_id());
+        User user = userService.findById(request.getUserId());
         news.setUser(user);
 
-        Rank rank = rankService.findById(request.getRank_id());
+        Rank rank = rankService.findById(request.getRankId());
         news.setRank(rank);
 
         return news;
@@ -62,7 +62,8 @@ public class NewsMapper {
     public News requestToNews(Long id, NewsRequest request){
         News news = requestToNews(request);
         news.setId(id);
-        news.setComments(null);
+        news.setComments(null); // чтобы .nonNullPropertiesCopy не перезаписывал пустым листом
+
         return news;
     }
 

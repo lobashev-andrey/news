@@ -1,5 +1,6 @@
 package com.example.news.service;
 
+import com.example.news.filter.UserFilter;
 import com.example.news.model.User;
 import com.example.news.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -12,10 +13,16 @@ import java.util.List;
 public class UserServiceImpl implements UserService{
 
     private final UserRepository repository;
+
     @Override
+    public List<User> findAll(UserFilter filter) {
+        return null; // Заглушка
+    }
+
     public List<User> findAll() {
         return repository.findAll();
     }
+
 
     @Override
     public User findById(Long id) {

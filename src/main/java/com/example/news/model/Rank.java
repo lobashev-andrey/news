@@ -1,15 +1,26 @@
 package com.example.news.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
+import lombok.*;
 
-@Data
+import java.util.ArrayList;
+import java.util.List;
+
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
+@Builder
+@Entity(name = "ranks")
 public class Rank {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
-    private User author;
+
+    @Builder.Default
+    @OneToMany(mappedBy = "rank", cascade = CascadeType.ALL)
+    public List<News> news = new ArrayList<>();
 }

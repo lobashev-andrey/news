@@ -10,8 +10,8 @@ import lombok.NoArgsConstructor;
 public class NewsRequest {
 
     private String name;
-    private Long rank_id;
+    private Long rankId;
     private String text;
-    private Long user_id;
+    private Long userId;
 
 }

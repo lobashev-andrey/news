@@ -11,5 +11,4 @@ public class RankResponse {
 
     private Long id;
     private String name;
-    private Long author_id;
 }

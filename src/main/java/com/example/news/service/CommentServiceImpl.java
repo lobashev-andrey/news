@@ -1,5 +1,6 @@
 package com.example.news.service;
 
+import com.example.news.filter.CommentFilter;
 import com.example.news.model.Comment;
 import com.example.news.repository.CommentRepository;
 import lombok.RequiredArgsConstructor;
@@ -14,8 +15,8 @@ public class CommentServiceImpl implements CommentService {
     private final CommentRepository repository;
 
     @Override
-    public List<Comment> findAll() {
-        return repository.findAll();
+    public List<Comment> findAllByNewsId(CommentFilter filter) {
+        return repository.findAllByNewsId(filter.getNewsId());
     }
 
     @Override

@@ -57,4 +57,5 @@ public class RankRepositoryImpl implements RankRepository {
         // Но оставим местечко для возможной добавки.
         ranks.remove(existedRank);
     }
+
 }

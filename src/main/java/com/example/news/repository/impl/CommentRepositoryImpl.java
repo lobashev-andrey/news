@@ -22,8 +22,8 @@ public class CommentRepositoryImpl implements CommentRepository {
     private final AtomicLong currentId = new AtomicLong(1);
 
     @Override
-    public List<Comment> findAll() {
-        return comments;
+    public List<Comment> findAllByNewsId(Long newsId) {
+        return comments.stream().filter(c -> Objects.equals(c.getUser().getId(), newsId)).toList();
     }
 
     @Override

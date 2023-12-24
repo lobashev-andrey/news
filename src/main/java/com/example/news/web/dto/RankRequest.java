@@ -10,5 +10,4 @@ import lombok.NoArgsConstructor;
 public class RankRequest {
 
     private String name;
-    private Long author_id;
 }
