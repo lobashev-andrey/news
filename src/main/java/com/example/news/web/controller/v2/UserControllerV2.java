@@ -1,7 +1,9 @@
 package com.example.news.web.controller.v2;
 
+import com.example.news.aop.annotation.UserDataAccessCheck;
+import com.example.news.exception.UnauthorizedAccessException;
 import com.example.news.filter.UserFilter;
-import com.example.news.mapper.v2.UserMapperV2;
+import com.example.news.mapper.v2.UserMapperV3;
 import com.example.news.service.DatabaseUserService;
 import com.example.news.web.dto.UserRequest;
 import com.example.news.web.dto.UserResponse;
@@ -10,6 +12,9 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -18,11 +23,11 @@ import org.springframework.web.bind.annotation.*;
 public class UserControllerV2 {
 
     private final DatabaseUserService service;
-    private final UserMapperV2 mapper;
-
+    private final UserMapperV3 mapper;
 
 
     @GetMapping
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<UserResponseList> findAll(@Valid UserFilter filter){
         return ResponseEntity.ok(
                 mapper.userListToUserResponseList(
@@ -30,22 +35,16 @@ public class UserControllerV2 {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UserResponse> findById(@PathVariable Long id){
+    @UserDataAccessCheck
+    public ResponseEntity<UserResponse> findById(@PathVariable Long id, @AuthenticationPrincipal UserDetails userDetails) throws UnauthorizedAccessException {
         return ResponseEntity.ok(
                 mapper.userToUserResponse(
                         service.findById(id)));
     }
 
-    @PostMapping
-    public ResponseEntity<UserResponse> create(@RequestBody UserRequest request){
-        return ResponseEntity.status(HttpStatus.CREATED).body(
-                mapper.userToUserResponse(
-                        service.save(
-                                mapper.userRequestToUser(request))));
-    }
-
     @PutMapping("/{id}")
-    public ResponseEntity<UserResponse> update(@PathVariable Long id, @RequestBody UserRequest request){
+    @UserDataAccessCheck
+    public ResponseEntity<UserResponse> update(@PathVariable Long id, @AuthenticationPrincipal UserDetails userDetails, @RequestBody UserRequest request) throws UnauthorizedAccessException {
         return ResponseEntity.ok(
                 mapper.userToUserResponse(
                         service.update(
@@ -53,7 +52,8 @@ public class UserControllerV2 {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id){
+    @UserDataAccessCheck
+    public ResponseEntity<Void> delete(@PathVariable Long id, @AuthenticationPrincipal UserDetails userDetails) throws UnauthorizedAccessException {
         service.delete(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }

@@ -1,7 +1,7 @@
 package com.example.news.web.controller;
 
 import com.example.news.exception.IllegalOperationException;
-import com.example.news.exception.UnautorizedAccessException;
+import com.example.news.exception.UnauthorizedAccessException;
 import com.example.news.web.dto.ErrorResponse;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -38,8 +38,8 @@ public class ExceptionHandlerController {
                                 "Получить список комментариев можно только для конкретной новости, указав newsId"));
     }
 
-    @ExceptionHandler(UnautorizedAccessException.class)
-    public ResponseEntity<ErrorResponse> unauthorizedAccess(UnautorizedAccessException ex){
+    @ExceptionHandler(UnauthorizedAccessException.class)
+    public ResponseEntity<ErrorResponse> unauthorizedAccess(UnauthorizedAccessException ex){
 
         return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED)
                 .body(new ErrorResponse(ex.getMessage()));

@@ -11,6 +11,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -37,6 +38,7 @@ public class RankControllerV2 {
     }
 
     @PostMapping
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_MODERATOR')")
     public ResponseEntity<RankResponse> create(@RequestBody RankRequest request){
         return ResponseEntity.status(HttpStatus.CREATED).body(
                 mapper.rankToResponse(
@@ -45,6 +47,7 @@ public class RankControllerV2 {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_MODERATOR')")
     public ResponseEntity<RankResponse> update(@PathVariable Long id, @RequestBody RankRequest request) {
         return ResponseEntity.ok(
                 mapper.rankToResponse(
@@ -53,6 +56,7 @@ public class RankControllerV2 {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_MODERATOR')")
     public ResponseEntity<Void> delete(@PathVariable Long id) throws IllegalOperationException {
         service.delete(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();

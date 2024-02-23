@@ -21,6 +21,6 @@ public class Rank {
     private String name;
 
     @Builder.Default
-    @OneToMany(mappedBy = "rank", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "rank", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     public List<News> news = new ArrayList<>();
 }

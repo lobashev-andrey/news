@@ -8,4 +8,13 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface DatabaseNewsRepository extends JpaRepository<News, Long>, JpaSpecificationExecutor<News> {
 
+//    @Override
+//    @EntityGraph(attributePaths = "comments")
+//    Optional<News> findById(Long id);
+//
+//    @Override
+//    @EntityGraph(attributePaths = "comments")
+//    Page<News> findAll(Specification<News> specification, Pageable pageable);
+
+
 }

@@ -34,6 +34,13 @@ public class DatabaseUserService implements UserService{
                         MessageFormat.format("Пользователь с ID {0} не найден", id)));
     }
 
+    public User findByName(String name) {
+        return repository.findByName(name)
+                .orElseThrow(() -> new EntityNotFoundException(
+                        MessageFormat.format("Пользователь с именем {0} не найден", name)));
+    }
+
+
     @Override
     public User save(User user) {
         return repository.save(user);
