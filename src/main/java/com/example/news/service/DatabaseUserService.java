@@ -1,5 +1,6 @@
 package com.example.news.service;
 
+import com.example.news.exception.IllegalOperationException;
 import com.example.news.filter.UserFilter;
 import com.example.news.model.User;
 import com.example.news.repository.DatabaseUserRepository;
@@ -42,15 +43,20 @@ public class DatabaseUserService implements UserService{
 
 
     @Override
-    public User save(User user) {
+    public User save(User user) throws IllegalOperationException {
+        usernameFreeCheck(user.getName());
+
         return repository.save(user);
     }
 
     @Override
-    public User update(User user) {
+    public User update(User user) throws IllegalOperationException {
         User existedUser = findById(user.getId());
 
-//        user.setNews(null);
+        if ( !user.getName().equals(existedUser.getName()) ) {
+            usernameFreeCheck(user.getName());
+        }
+
         BeanUtils.nonNullPropertiesCopy(user, existedUser);
 
         repository.save(existedUser);
@@ -61,5 +67,12 @@ public class DatabaseUserService implements UserService{
     @Override
     public void delete(Long id) {
         repository.delete(findById(id));
+    }
+
+
+    public void usernameFreeCheck(String username) throws IllegalOperationException {
+        if (repository.findByName(username).isPresent()) {
+            throw new IllegalOperationException("Этот юзернейм занят, используйте другой вариант");
+        }
     }
 }

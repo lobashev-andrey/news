@@ -10,12 +10,4 @@ import java.util.Optional;
 public interface DatabaseUserRepository extends JpaRepository<User, Long>{
 
     Optional<User> findByName(String name);
-
-//    @Override
-//    @EntityGraph(attributePaths = {"news", "comments"})
-//    Page<User> findAll(Pageable pageable);
-//
-//    @Override
-//    @EntityGraph(attributePaths = {"news", "comments"})
-//    Optional<User> findById(Long id);
 }

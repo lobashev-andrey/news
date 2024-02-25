@@ -1,6 +1,7 @@
 package com.example.news.web.controller.v2;
 
 import com.example.news.aop.annotation.UserDataAccessCheck;
+import com.example.news.exception.IllegalOperationException;
 import com.example.news.exception.UnauthorizedAccessException;
 import com.example.news.filter.UserFilter;
 import com.example.news.mapper.v2.UserMapperV3;
@@ -44,7 +45,10 @@ public class UserControllerV2 {
 
     @PutMapping("/{id}")
     @UserDataAccessCheck
-    public ResponseEntity<UserResponse> update(@PathVariable Long id, @AuthenticationPrincipal UserDetails userDetails, @RequestBody UserRequest request) throws UnauthorizedAccessException {
+    public ResponseEntity<UserResponse> update(@PathVariable Long id,
+                                               @AuthenticationPrincipal UserDetails userDetails,
+                                               @RequestBody UserRequest request)
+            throws UnauthorizedAccessException, IllegalOperationException {
         return ResponseEntity.ok(
                 mapper.userToUserResponse(
                         service.update(

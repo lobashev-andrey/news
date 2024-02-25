@@ -1,5 +1,6 @@
 package com.example.news.web.controller.v2;
 
+import com.example.news.exception.IllegalOperationException;
 import com.example.news.mapper.v2.UserMapperV3;
 import com.example.news.service.DatabaseUserService;
 import com.example.news.web.dto.UserRequest;
@@ -21,7 +22,7 @@ public class AccountController {
     private final UserMapperV3 mapper;
 
     @PostMapping
-    public ResponseEntity<UserResponse> create(@RequestBody UserRequest request){
+    public ResponseEntity<UserResponse> create(@RequestBody UserRequest request) throws IllegalOperationException {
         return ResponseEntity.status(HttpStatus.CREATED).body(
                 mapper.userToUserResponse(
                         service.save(
